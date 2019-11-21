@@ -1,0 +1,51 @@
+/* Style de la page */
+body {
+    background-color: #f5f5f5;
+    font-family: 'Helvetica', Arial, sans-serif;
+}
+
+/* Bloc central */
+.content {
+    width: 100%;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #ffffff;
+    padding: 50px;
+}
+
+/* Titre */
+h1 {
+    margin-bottom: 50px;
+    font-size: 35px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #f5f5f5;
+}
+
+#finish {
+    text-align: center;
+}
+
+/* Bouton pour réessayer */
+.retryBtn {
+    cursor: pointer;
+    font-size: 20px;
+    border-radius: 100%;
+    border: 2px solid darkblue;
+    color: rgb(0, 0, 139);
+    background-color: transparent;
+    width: 50px;
+    height: 50px;
+}
+
+/* Pied de page */
+.footer {
+    margin-top: 50px;
+    text-align: center;
+    border-top: 1px solid #f5f5f5;
+}
+
+.footer img {
+    padding-top: 50px;
+    width: 100px;
+}
