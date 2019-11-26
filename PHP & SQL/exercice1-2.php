@@ -19,14 +19,11 @@ try {
     die('Erreur de connexion à la base de données : ' . $e->getMessage());
 }
 
+//var_dump($_POST);
+
 // VALIDATION DES CHAMPS
 if(isset($_POST['user_lastname'])) {
-
-    $filtered_email = filter_var($_POST['user_email'], FILTER_VALIDATE_EMAIL);
-    $filtered_lastname = filter_var($_POST['user_lastname'], FILTER_SANITIZE_STRING);
-    $filtered_firstname = filter_var($_POST['user_firstname'], FILTER_SANITIZE_STRING);
-
-    if($filtered_email && $filtered_firstname && $filtered_firstname) {
+    if($_POST['user_lastname'] !== '' && $_POST['user_firstname'] !== '' && $_POST['user_email'] !== '') {
         $query = $db->prepare('INSERT INTO stage.clients (lastname, firstname, email, gender) values (:lastname, :firstname, :email, :gender)');
 
         $query->execute([
@@ -36,13 +33,12 @@ if(isset($_POST['user_lastname'])) {
             'gender' => $_POST['user_gender']
         ]);
 
-        echo "<h3 style='color: green'>L'utilisateur " . $filtered_lastname . " a été inscrit</h3>";
+        echo "<h3 style='color: green'>L'utilisateur " . $_POST['user_firstname'] . " a été inscrit</h3>";
     } else {
-        echo "<p style='color: red'>Veuillez remplir tous les champs</p>";
-        $user_lastname = $_POST['user_lastname'];
-        $user_firstname = $_POST['user_firstname'];
-        $user_email = $_POST['user_email'];
+        echo "<h3 style='color: red'>Veuillez remplir tous les champs</h3>";
     }
+} else {
+    echo "<h3>Veuillez vous inscrire svp!</h3>";
 }
 
 ?>
@@ -57,15 +53,15 @@ if(isset($_POST['user_lastname'])) {
                 <legend>Inscription</legend>
                 <div>
                     <label for="lastname">Nom :</label>
-                    <input type="text" id="lastname" name="user_lastname" value="<?= $user_lastname ?? '' ?>">
+                    <input type="text" id="lastname" name="user_lastname" value="<?= $_POST['user_lastname'] ?? '' ?>">
                 </div>
                 <div>
                     <label for="firstname">Prénom :</label>
-                    <input type="text" id="firstname" name="user_firstname" value="<?= $user_firstname ?? '' ?>">
+                    <input type="text" id="firstname" name="user_firstname" value="<?= $_POST['user_firstname'] ?? '' ?>">
                 </div>
                 <div>
                     <label for="email">Email :</label>
-                    <input type="email" id="email" name="user_email" value="<?= $user_email ?? '' ?>">
+                    <input type="email" id="email" name="user_email" value="<?= $_POST['user_email'] ?? '' ?>">
                 </div>
                 <div>
                     <?php
